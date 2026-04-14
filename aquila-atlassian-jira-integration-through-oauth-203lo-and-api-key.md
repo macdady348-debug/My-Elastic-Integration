@@ -1,8 +1,8 @@
-# AQUILA - Atlassian Jira Integration through Oauth 2.0(3LO) and API Key
+# Atlassian Jira Integration through Oauth 2.0(3LO) and API Key
 
 #### <span style="color: rgb(53, 152, 219);">**What are API Token Scopes?**</span>
 
-Scopes define what actions an API token is allowed to perform in Atlassian apps such as Jira and Confluence. They enhance security by limiting permissions to only what's needed (e.g., read-only access to audit logs). Always use scoped tokens for AQUILA integrations—unscoped tokens are deprecated for most apps and may not support fine-grained access. For audit logs (events like user actions, config changes, or security incidents), use the specific scopes listed below. Broader scopes may be needed for other integrations (e.g., content indexing) but stick to these for basic monitoring to minimize risk.
+Scopes define what actions an API token is allowed to perform in Atlassian apps such as Jira and Confluence. They enhance security by limiting permissions to only what's needed (e.g., read-only access to audit logs). Always use scoped tokens for SIEM integrations—unscoped tokens are deprecated for most apps and may not support fine-grained access. For audit logs (events like user actions, config changes, or security incidents), use the specific scopes listed below. Broader scopes may be needed for other integrations (e.g., content indexing) but stick to these for basic monitoring to minimize risk.
 
 ##### <span style="color: rgb(53, 152, 219);">**Prerequisites**</span>
 
@@ -16,7 +16,7 @@ Scopes define what actions an API token is allowed to perform in Atlassian apps 
 
 1. Log in to [https://id.atlassian.com/manage-profile/security/api-tokens](https://id.atlassian.com/manage-profile/security/api-tokens).
 2. Select "Create API token with scopes".
-3. Enter a descriptive name for the token (e.g., "AQUILA- Audit Logs Monitoring").
+3. Enter a descriptive name for the token (e.g., "SIEM- Audit Logs Monitoring").
 
 Choose an expiration date for the token (between 1 and 365 days; consider shorter for security).
 
@@ -24,7 +24,7 @@ Choose an expiration date for the token (between 1 and 365 days; consider shorte
 2. Select the scopes or permissions the token should have: 
     - For Jira (audit logs): <span style="color: rgb(0, 0, 0);"><span class="sc-iiUIRa jEMjmA">**Classic**</span>:</span> `manage:jira-configuration or <span style="color: rgb(0, 0, 0);"><strong>Granular</strong></span>: read:audit-log:jira,read:user:jira` to access /rest/api/3/auditing/record.
 3. Click "Create".
-4. Copy the token and save it securely. You cannot view it again after this step. If lost, generate a new one. Share only with trusted integrations like AQUILA—revoke if compromised.
+4. Copy the token and save it securely. You cannot view it again after this step. If lost, generate a new one. Share only with trusted integrations like SIEM—revoke if compromised.
 
 ---
 
@@ -406,9 +406,3 @@ To view real-time logs from the jira-audit service:
 ```
 journalctl -u jira-audit -f
 ```
-
-<p class="callout info"><span style="color: rgb(0, 0, 0);">**Please provide the following information to CyTech.**</span></p>
-
-- <span style="color: rgb(0, 0, 0);">**Jira User Identifier**:</span> Your Atlassian email address (must be linked to an admin account as noted above).
-- <span style="color: rgb(0, 0, 0);">**Jira API Token**:</span> The scoped token created above.
-- <span style="color: rgb(0, 0, 0);">**Cloud\_ID**:</span> The ID retrieved from accessible-resources api call
